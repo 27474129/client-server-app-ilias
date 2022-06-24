@@ -1,0 +1,5 @@
+/venv
+/ilias/ilias/settings.py
+/ilias/authentication/migrations
+*/__pycache__/*
+*/.idea/*

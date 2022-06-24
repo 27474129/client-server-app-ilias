@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=1, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;500&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{% static 'authentication/css/style.css' %}">
+	<title>ILIAS - Sign In</title>
+</head>
+<body>
+	<div class="main_div">
+		<div class="container_headlines">
+			<div class="line_upper">
+				<div class="text_ilias">
+					ILIAS | ЭОС АлтГТУ
+				</div>
+				<div class="main_icon">
+					<img src="{% static 'authentication/images/HeaderIcon.svg' %}" alt="">
+				</div>
+			</div>
+			<div class="line_lower">
+			</div>
+		</div>
+
+		<div class="container_middle">
+			<form method="post">
+				{% csrf_token %}
+				<div class="container_body">
+					<div class="username">
+						<div class="username_text">
+							<font color="red">*</font> Username:
+						</div>
+						<div class="username_input">
+                            <input type="text" name="username">
+						</div>
+					</div>
+					<div class="password">
+						<div class="password_text">
+							<font color="red">*</font> Password:
+						</div>
+						<div class="password_input">
+                            <input type="password" name="password">
+						</div>
+					</div>
+					{% if not is_correct_userdata %}
+						<div class="wng_pw">
+							Wrong username or password
+						</div>
+					{% endif %}
+					<div class="btn">
+						<div class="btn_text">
+							<font color="red">*</font> Required
+						</div>
+						<div class="btn_main">
+							<button type="submit">Sign in</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<div class="container_footer">
+			<div class="text_footer">
+				<div class="text_cntInfo">
+					Contact Inforamtion:
+				</div>
+				<div class="links_cntInfo">
+					<a href="https://vk.com/i1d9i3n4a8x3u2i7474p129ido28r29m">Владимир Х.</a> <a href="https://vk.com/zxcurseds_son">Никита Б.</a> <a href="https://vk.com/a1ova">Яков Г.</a>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</body>
+</html>
