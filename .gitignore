@@ -1,6 +1,6 @@
 /venv
 /ilias/ilias/settings.py
 /ilias/authentication/migrations
-/.idea
-/ilias/authentication/__pycache__
-/ilias/ilias/__pycache__
+/.idea/
+/ilias/authentication/__pycache__/
+/ilias/ilias/__pycache__/
