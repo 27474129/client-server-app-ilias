@@ -1,52 +1,31 @@
 from django.shortcuts import render, redirect
 from .models import Student, Professor
-
+from authentication.classes.Authentication import Authentication
 
 
 def authentication(request):
-    context = {}
-    if (request.path == "/student_auth"):
-        context[ "role" ] = "student"
-    else:
-        context[ "role" ] = "professor"
+    auth = Authentication()
 
+    context = auth.get_user_role(request)
 
-    if ("username" in request.session):
-        if (context[ "role" ] == "student"):
-            return redirect("student_page")
-        else:
-            return redirect("professor_page")
+    is_authenticated = auth.is_authenticated(request, context)
 
-    if (request.method == "POST" and "username" not in request.session):
-        entered_username = request.POST[ "username" ]
-        entered_password = request.POST[ "password" ]
+    if (not is_authenticated):
+        response = auth.authenticate(request, context)
 
-
-        if (context[ "role" ] == "student"):
-            model = Student
-        else:
-            model = Professor
-
-        match = model.objects.filter(username=entered_username).filter(password=entered_password)
-
-        if (len(match) != 0):
-            user = match[ 0 ]
-        else:
+        if (not response):
             context[ "is_correct_userdata" ] = False
             return render(request, "authentication/authentication.html", context)
 
-        if (user.username == entered_username and user.password == entered_password):
-            request.session.set_expiry(86400)
-            request.session[ "username" ] = entered_username
-            context["is_correct_userdata"] = True
-            if (context[ "role" ] == "student"):
-                return redirect("student_page")
-            else:
-                return redirect("professor_page")
+        if (response == "GET"):
+            context[ "is_correct_userdata" ] = True
+            return render(request, "authentication/authentication.html", context)
 
+        return redirect(response)
 
-    context["is_correct_userdata"] = True
-    return render(request, "authentication/authentication.html", context)
+    else:
+        return redirect(is_authenticated)
+
 
 
 def logout(request):

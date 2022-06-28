@@ -38,8 +38,7 @@ class Authentication:
             if (len(match) != 0):
                 user = match[0]
             else:
-                context["is_correct_userdata"] = False
-                return context
+                return False
 
             if (user.username == entered_username and user.password == entered_password):
                 request.session.set_expiry(86400)
@@ -50,4 +49,4 @@ class Authentication:
                 else:
                     return "professor_page"
 
-        return None
+        return "GET"
