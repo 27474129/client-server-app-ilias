@@ -6,14 +6,22 @@
 	<meta name="viewport" content="width=1, initial-scale=1.0">
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;500&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="{% static 'authentication/css/style.css' %}">
-	<title>ILIAS - Sign In</title>
+	{% if role == "student" %}
+		<title>ILIAS - Student authentication</title>
+	{% else %}
+		<title>ILIAS - Professor authentication</title>
+	{% endif %}
 </head>
 <body>
 	<div class="main_div">
 		<div class="container_headlines">
 			<div class="line_upper">
 				<div class="text_ilias">
-					ILIAS | ЭОС АлтГТУ
+					{% if role == "student" %}
+						ILIAS - Student authentication
+					{% else %}
+						ILIAS - Professor authentication
+					{% endif %}
 				</div>
 				<div class="main_icon">
 					<img src="{% static 'authentication/images/HeaderIcon.svg' %}" alt="">
@@ -22,6 +30,13 @@
 			<div class="line_lower">
 			</div>
 		</div>
+		{% if role == "student" %}
+			<a href="{% url 'professor_auth_page' %}"><h2>Are you professor?</h2></a>
+			<h2>Student authentication</h2>
+		{% else %}
+			<a href="{% url 'student_auth_page' %}"><h1>Are you student?</h1></a>
+			<h2>Professor authentication</h2>
+		{% endif %}
 
 		<div class="container_middle">
 			<form method="post">
@@ -63,15 +78,13 @@
 		<div class="container_footer">
 			<div class="text_footer">
 				<div class="text_cntInfo">
-					Contact Inforamtion:
+					Contact Information:
 				</div>
 				<div class="links_cntInfo">
 					<a href="https://vk.com/i1d9i3n4a8x3u2i7474p129ido28r29m">Владимир Х.</a> <a href="https://vk.com/zxcurseds_son">Никита Б.</a> <a href="https://vk.com/a1ova">Яков Г.</a>
 				</div>
 			</div>
 		</div>
-
 	</div>
-
 </body>
 </html>

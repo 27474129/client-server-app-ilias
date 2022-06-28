@@ -1,8 +1,10 @@
-from django.urls import path
+from django.urls import path, include
 from .views import *
 
+
 urlpatterns = [
-    path("auth", authentication, name="auth_page"),
-    path("subjects", subjects, name="subjects_page"),
-    path("logout", logout, name="logout_func")
+    path("student_auth", authentication, name="student_auth_page"),
+    path("professor_auth", authentication, name="professor_auth_page"),
+    path("logout", logout, name="logout_func"),
+    path("", root, name="root_page"),
 ]

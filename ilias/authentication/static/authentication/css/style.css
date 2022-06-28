@@ -124,6 +124,7 @@ a:visited {
 	flex: 0 0 auto;
 	margin: 0 30px;
 	display: inline-block;
+	font-size:18px;
 }
 
 .username_input {
@@ -140,6 +141,7 @@ a:visited {
 	flex: 1 0 auto;
 	margin: 0 30px;
 	display: inline-block;
+	font-size:18px;
 }
 
 .password_input {
@@ -162,10 +164,10 @@ a:visited {
 }*/
 
 .wng_pw {
-	text-align: left;
+	text-align: center;
 	padding: 10px;
 	color: red;
-	font-size: 9px;
+	font-size: 14px;
 	margin-top: 5px;
 }
 .wng_pw_mdl {
@@ -221,6 +223,7 @@ a:visited {
 	margin: 15px;
 	line-height: 19px;
 }
+
 
 .links_cntInfo {
 	display: inline-flex;
