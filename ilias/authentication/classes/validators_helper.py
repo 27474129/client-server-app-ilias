@@ -1,4 +1,4 @@
-# this file needs to avoid a circular models import
+# this file needs to avoid a circular import of models
 
 
 from ..models import Student, Professor
