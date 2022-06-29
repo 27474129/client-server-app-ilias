@@ -1,6 +1,7 @@
 from django.core.exceptions import ValidationError
 import re
-from .validators_helper import get_matches
+from .Request import Request
+
 
 class Validators:
     def check_username_length(self, value):
@@ -10,9 +11,18 @@ class Validators:
             )
 
     def check_for_uniqueness(self, value):
-        matches = get_matches(value)
+        request = Request()
+        student_matches = request.send_request(
+            request = f"SELECT * FROM authentication_student WHERE username='{value}';",
+            is_need_response=False
+        )
+        professor_matches = request.send_request(
+            request = f"SELECT * FROM authentication_professor WHERE username='{value}';",
+            is_need_response=False
+        )
 
-        if (len(matches[ 0 ]) != 0 or len(matches[ 1 ]) != 0):
+
+        if (student_matches or professor_matches):
             raise ValidationError(
                 "This username already exists"
             )
