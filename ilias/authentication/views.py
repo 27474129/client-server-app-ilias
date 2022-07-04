@@ -8,12 +8,13 @@ def authentication(request):
 
     context = auth.get_user_role(request)
 
-    is_authenticated = auth.is_authenticated(request, context)
+    is_authenticated = auth.check_if_is_authenticated(request, context)
 
     if (not is_authenticated):
         response = auth.authenticate(request, context)
 
         if (not response):
+
             context[ "is_correct_userdata" ] = False
             return render(request, "authentication/authentication.html", context)
 
@@ -21,7 +22,7 @@ def authentication(request):
             context[ "is_correct_userdata" ] = True
             return render(request, "authentication/authentication.html", context)
 
-        return redirect(response)
+        return response
 
     else:
         return redirect(is_authenticated)
@@ -33,7 +34,9 @@ def logout(request):
         del request.session[ "username" ]
 
         if (request.session[ "role" ] == "student"):
+            del request.session["role"]
             return redirect("student_auth_page")
+        del request.session["role"]
         return redirect("professor_auth_page")
     else:
         return redirect("student_auth_page")

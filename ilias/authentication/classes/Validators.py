@@ -4,11 +4,7 @@ from .Request import Request
 
 
 class Validators:
-    def check_username_length(self, value):
-        if (len(value) < 5):
-            raise ValidationError(
-                "Length of username must be more then 8"
-            )
+
 
     def check_for_uniqueness(self, value):
         request = Request()
@@ -46,5 +42,23 @@ class Validators:
         if (len(match) < 1):
             raise ValidationError(
                 "Your password must contain at least one number"
+            )
+
+
+    def checking_for_numbers(self, value):
+        match = re.findall(r"[0-9]", value)
+        if (len(match) != 0):
+            raise ValidationError(
+                "Name, cant contain numbers"
+            )
+
+
+    def check_if_username_consists_only_of_digits(self, value):
+        match1 = re.findall(r"[a-z]", value)
+        match2 = re.findall(r"[A-Z]", value)
+
+        if (len(match1) != 0 or len(match2) != 0):
+            raise ValidationError(
+                "Record book number must contain digits the only"
             )
 

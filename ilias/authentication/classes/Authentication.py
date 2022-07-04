@@ -14,7 +14,7 @@ class Authentication:
 
         return context
 
-    def is_authenticated(self, request, context):
+    def check_if_is_authenticated(self, request, context):
         if ("username" in request.session):
             if (context["role"] == "student"):
                 return "student_page"
@@ -43,10 +43,8 @@ class Authentication:
             if (user.username == entered_username and user.password == entered_password):
                 request.session.set_expiry(86400)
                 request.session["username"] = entered_username
+                request.session[ "role" ] = context[ "role" ]
 
-                if (context["role"] == "student"):
-                    return "student_page"
-                else:
-                    return "professor_page"
+                return redirect("student_page") if context["role"] == "student" else redirect("professor_page")
 
         return "GET"
