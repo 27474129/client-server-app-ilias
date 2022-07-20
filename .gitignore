@@ -2,7 +2,5 @@
 /ilias/ilias/settings.py
 /ilias/authentication/migrations
 /.idea/
-/ilias/authentication/__pycache__/
-/ilias/ilias/__pycache__/
 /documents
 **/__pycache__/
